@@ -1,5 +1,22 @@
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
+
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  const { isLoading, error } = useAuth0();
+  return (
+    <main>
+      <h1>Auth0 Login</h1>
+      {error && <p>Authentication error</p>}
+      {!error && isLoading && <p>Loading ...</p>}
+      {!error && !isLoading && (
+        <>
+          <LoginButton></LoginButton>
+          <LogoutButton></LogoutButton>
+        </>
+      )}
+    </main>
+  );
 }
 
 export default App;
