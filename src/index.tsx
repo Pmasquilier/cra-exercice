@@ -4,6 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 const domain: string = process.env.REACT_APP_AUTH0_DOMAIN as string;
 const clientId: string = process.env.REACT_APP_AUTH0_CLIENT_ID as string;
