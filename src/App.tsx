@@ -1,21 +1,17 @@
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import { CallbackPage } from "./pages/CallbackPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  const { isLoading, error } = useAuth0();
   return (
-    <main>
-      <h1>Auth0 Login</h1>
-      {error && <p>Authentication error</p>}
-      {!error && isLoading && <p>Loading ...</p>}
-      {!error && !isLoading && (
-        <>
-          <LoginButton></LoginButton>
-          <LogoutButton></LogoutButton>
-        </>
-      )}
-    </main>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/callback" element={<CallbackPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 
