@@ -1,7 +1,5 @@
-import React from "react";
-
 const MyDeck = () => {
-  return <div>MyDeck</div>;
+  return <h1>My Deck</h1>;
 };
 
 export default MyDeck;

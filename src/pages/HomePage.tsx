@@ -1,5 +1,4 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
 import MyDeck from "../components/MyDeck";
 import ButtonAppBar from "../components/NavBar";
 
