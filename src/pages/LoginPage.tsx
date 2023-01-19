@@ -1,9 +1,9 @@
 import React from "react";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import LoginButton from "../components/buttons/LoginButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import SignupButton from "../components/buttons/SignupButton";
 
-const Home = () => {
+const LoginPage = () => {
   const { isLoading, error } = useAuth0();
 
   return (
@@ -14,10 +14,11 @@ const Home = () => {
       {!error && !isLoading && (
         <>
           <LoginButton></LoginButton>
+          <SignupButton></SignupButton>
         </>
       )}
     </main>
   );
 };
 
-export default Home;
+export default LoginPage;

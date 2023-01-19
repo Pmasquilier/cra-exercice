@@ -3,9 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./buttons/LogoutButton";
 
-const ButtonAppBar = () => {
+const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -20,4 +20,4 @@ const ButtonAppBar = () => {
   );
 };
 
-export default ButtonAppBar;
+export default NavBar;

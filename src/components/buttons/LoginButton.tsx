@@ -4,10 +4,19 @@ import Button from "@mui/material/Button";
 
 const LoginButton = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+  const handleLogin = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/my-deck",
+      },
+    });
+  };
+
   return (
     <>
       {!isAuthenticated && (
-        <Button variant="contained" onClick={() => loginWithRedirect()}>
+        <Button variant="contained" onClick={handleLogin}>
           Sign In
         </Button>
       )}
