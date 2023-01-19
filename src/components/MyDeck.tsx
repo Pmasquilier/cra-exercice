@@ -1,9 +1,11 @@
+import { Button } from "@mui/material";
+import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { getPokemon } from "../services/api";
 import { Pokemon } from "../type/pokemon";
 
 const MyDeck = () => {
-  const [pokemon, setPokemon] = useState<Pokemon>();
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   const addPokemonToMyDeck = (pokemon: any) => {
     const newPokemon: Pokemon = {
@@ -13,11 +15,21 @@ const MyDeck = () => {
       weight: pokemon.weight,
       sprites: pokemon.sprites.back_default,
     };
-    setPokemon(newPokemon);
+    setPokemons([...pokemons, newPokemon]);
+  };
+
+  const getRandomInt = (max: number) => {
+    return Math.floor(Math.random() * max) + 1;
+  };
+
+  const catchAPokemon = () => {
+    getPokemon(getRandomInt(100))
+      .then((pokemon) => addPokemonToMyDeck(pokemon))
+      .catch(console.error);
   };
 
   useEffect(() => {
-    getPokemon(2)
+    getPokemon(getRandomInt(3))
       .then((pokemon) => addPokemonToMyDeck(pokemon))
       .catch(console.error);
   }, []);
@@ -25,8 +37,17 @@ const MyDeck = () => {
   return (
     <div>
       <h1>My Deck</h1>
-      <p>{pokemon?.name}</p>
-      <img src={pokemon?.sprites} alt={pokemon?.name} />
+      <div key={nanoid()}>
+        {pokemons?.map((pokemon) => (
+          <>
+            <p>{pokemon?.name}</p>
+            <img src={pokemon?.sprites} alt={pokemon?.name} />
+          </>
+        ))}
+      </div>
+      <Button variant="contained" onClick={catchAPokemon}>
+        Catch a Pokemon !
+      </Button>
     </div>
   );
 };
