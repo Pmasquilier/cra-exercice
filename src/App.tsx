@@ -8,9 +8,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<MyDeck />} />
         <Route path="/callback" element={<CallbackPage />} />
-        <Route path="/my-deck" element={<MyDeck />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

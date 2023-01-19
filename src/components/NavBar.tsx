@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import LogoutButton from "./buttons/LogoutButton";
+import NavBarButtons from "./buttons/NavBarButtons";
 
 const NavBar = () => {
   return (
@@ -13,7 +13,7 @@ const NavBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Catch them all
           </Typography>
-          <LogoutButton></LogoutButton>
+          <NavBarButtons></NavBarButtons>
         </Toolbar>
       </AppBar>
     </Box>
