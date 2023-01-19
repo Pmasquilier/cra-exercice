@@ -1,8 +1,9 @@
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { getPokemon } from "../services/api";
 import { Pokemon } from "../type/pokemon";
+import PokemonCard from "./PokemonCard";
 
 const MyDeck = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -14,6 +15,7 @@ const MyDeck = () => {
       height: pokemon.height,
       weight: pokemon.weight,
       sprites: pokemon.sprites.back_default,
+      id: nanoid(),
     };
     setPokemons([...pokemons, newPokemon]);
   };
@@ -28,6 +30,12 @@ const MyDeck = () => {
       .catch(console.error);
   };
 
+  const releaseAPokemon = (pokemonID: string) => {
+    setPokemons((oldPokemonList) => {
+      return oldPokemonList.filter((pokemon) => pokemon.id !== pokemonID);
+    });
+  };
+
   useEffect(() => {
     getPokemon(getRandomInt(3))
       .then((pokemon) => addPokemonToMyDeck(pokemon))
@@ -36,18 +44,20 @@ const MyDeck = () => {
 
   return (
     <div>
-      <h1>My Deck</h1>
-      <div key={nanoid()}>
-        {pokemons?.map((pokemon) => (
-          <>
-            <p>{pokemon?.name}</p>
-            <img src={pokemon?.sprites} alt={pokemon?.name} />
-          </>
-        ))}
-      </div>
-      <Button variant="contained" onClick={catchAPokemon}>
+      <Button sx={{ margin: 1 }} variant="contained" onClick={catchAPokemon}>
         Catch a Pokemon !
       </Button>
+
+      <Grid container spacing={2}>
+        {pokemons?.map((pokemon) => (
+          <Grid item xs={6} sm={3} key={nanoid()}>
+            <PokemonCard
+              pokemon={pokemon}
+              releaseAPokemon={releaseAPokemon}
+            ></PokemonCard>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
