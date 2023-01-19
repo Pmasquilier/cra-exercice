@@ -36,6 +36,17 @@ const MyDeck = () => {
     });
   };
 
+  const changeAPokemonName = (pokemonName: string, pokemonID: string) => {
+    const newPokemonList = [...pokemons].map((pokemon) => {
+      if (pokemon.id === pokemonID) {
+        return { ...pokemon, name: pokemonName };
+      }
+      return pokemon;
+    });
+
+    setPokemons(newPokemonList);
+  };
+
   useEffect(() => {
     getPokemon(getRandomInt(3))
       .then((pokemon) => addPokemonToMyDeck(pokemon))
@@ -44,16 +55,22 @@ const MyDeck = () => {
 
   return (
     <div>
-      <Button sx={{ margin: 1 }} variant="contained" onClick={catchAPokemon}>
+      <Button
+        sx={{ margin: 1 }}
+        variant="contained"
+        color="success"
+        onClick={catchAPokemon}
+      >
         Catch a Pokemon !
       </Button>
 
       <Grid container spacing={2}>
         {pokemons?.map((pokemon) => (
-          <Grid item xs={6} sm={3} key={nanoid()}>
+          <Grid item xs={6} sm={3} key={pokemon.id}>
             <PokemonCard
               pokemon={pokemon}
               releaseAPokemon={releaseAPokemon}
+              changeAPokemonName={changeAPokemonName}
             ></PokemonCard>
           </Grid>
         ))}
