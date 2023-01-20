@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { Pokemon } from "../../type/pokemon";
+import { usePokemonSlice } from "../../utils/custom-hook";
 
 type Props = {
   pokemon: Pokemon;
@@ -19,24 +19,7 @@ type Props = {
 
 const PokemonCard = ({ pokemon }: Props) => {
   const [isNameFocused, setIsNameFocused] = useState(false);
-  const dispatch = useDispatch();
-
-  const releaseAPokemon = (pokemonID: string) => {
-    dispatch({
-      type: "pokemons/removePokemon",
-      payload: pokemonID,
-    });
-  };
-
-  const changeAPokemonName = (pokemonName: string, pokemonID: string) => {
-    dispatch({
-      type: "pokemons/changePokemonName",
-      payload: {
-        pokemonName,
-        pokemonID,
-      },
-    });
-  };
+  const { releaseAPokemon, changeAPokemonName } = usePokemonSlice();
 
   return (
     <>

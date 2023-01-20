@@ -9,7 +9,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Auth0ProviderWithNavigate } from "./components/auth/Auth0ProviderWithNavigate";
 import { Provider } from "react-redux";
-import { store } from "./services/redux";
+import { store } from "./utils/redux";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -1,7 +1,7 @@
 import { configureStore, createSlice, nanoid } from "@reduxjs/toolkit";
 import { Pokemon } from "../type/pokemon";
 
-const pokemonsSlice = createSlice({
+export const pokemonsSlice = createSlice({
   name: "pokemons",
   initialState: [] as Pokemon[],
   reducers: {

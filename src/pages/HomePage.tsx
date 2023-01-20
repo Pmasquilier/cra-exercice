@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Typography } from "@mui/material";
-import MyDeck from "../components/deck/MyDeck";
+import AuthenticatedHome from "../components/auth/AuthenticatedHome";
+import UnauthenticatedHome from "../components/auth/UnauthenticatedHome";
 import ButtonAppBar from "../components/navbar/NavBar";
 
 const HomePage = () => {
@@ -11,11 +11,11 @@ const HomePage = () => {
       <div>
         <ButtonAppBar />
       </div>
-      {isAuthenticated && <MyDeck></MyDeck>}
-      {!isAuthenticated && (
-        <Typography sx={{ margin: 4 }} variant="h4" align="center">
-          You need to be authenticated to see your pokemons!
-        </Typography>
+
+      {isAuthenticated ? (
+        <AuthenticatedHome></AuthenticatedHome>
+      ) : (
+        <UnauthenticatedHome></UnauthenticatedHome>
       )}
     </div>
   );
