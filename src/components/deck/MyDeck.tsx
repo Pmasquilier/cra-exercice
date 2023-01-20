@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import { nanoid } from "nanoid";
-import { getPokemon } from "../services/api";
-import { Pokemon } from "../type/pokemon";
+import { getPokemon } from "../../services/api";
+import { Pokemon } from "../../type/pokemon";
 import { useDispatch, useSelector } from "react-redux";
 import PokemonCard from "./PokemonCard";
 

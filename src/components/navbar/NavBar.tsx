@@ -2,7 +2,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import NavBarButtons from "./buttons/NavBarButtons";
+import NavBarButtons from "./NavBarButtons";
 
 const NavBar = () => {
   return (

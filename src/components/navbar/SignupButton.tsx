@@ -15,7 +15,7 @@ const SignupButton = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={handleSignUp}>
+      <Button variant="contained" sx={{ margin: 1 }} onClick={handleSignUp}>
         Sign Up
       </Button>
     </>

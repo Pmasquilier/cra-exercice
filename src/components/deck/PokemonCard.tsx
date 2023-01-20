@@ -8,10 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Pokemon } from "../type/pokemon";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Pokemon } from "../../type/pokemon";
 
 type Props = {
   pokemon: Pokemon;

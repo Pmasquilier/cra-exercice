@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoaderPage from "./pages/LoaderPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
-import PokemonDetails from "./components/PokemonDetails";
+import PokemonDetails from "./components/pokemon-details/PokemonDetails";
 
 function App() {
   const { isLoading, error } = useAuth0();
