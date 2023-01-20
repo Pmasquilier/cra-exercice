@@ -1,12 +1,13 @@
 import { Button, Grid } from "@mui/material";
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
 import { getPokemon } from "../services/api";
 import { Pokemon } from "../type/pokemon";
+import { useDispatch, useSelector } from "react-redux";
 import PokemonCard from "./PokemonCard";
 
 const MyDeck = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const pokemons: Pokemon[] = useSelector((state: any) => state.pokemons);
+  const dispatch = useDispatch();
 
   const addPokemonToMyDeck = (pokemon: any) => {
     const newPokemon: Pokemon = {
@@ -14,10 +15,14 @@ const MyDeck = () => {
       base_experience: pokemon.base_experience,
       height: pokemon.height,
       weight: pokemon.weight,
-      sprites: pokemon.sprites.back_default,
+      sprites: pokemon.sprites,
+      abilities: pokemon.abilities,
       id: nanoid(),
     };
-    setPokemons([...pokemons, newPokemon]);
+    dispatch({
+      type: "pokemons/addPokemon",
+      payload: newPokemon,
+    });
   };
 
   const getRandomInt = (max: number) => {
@@ -29,29 +34,6 @@ const MyDeck = () => {
       .then((pokemon) => addPokemonToMyDeck(pokemon))
       .catch(console.error);
   };
-
-  const releaseAPokemon = (pokemonID: string) => {
-    setPokemons((oldPokemonList) => {
-      return oldPokemonList.filter((pokemon) => pokemon.id !== pokemonID);
-    });
-  };
-
-  const changeAPokemonName = (pokemonName: string, pokemonID: string) => {
-    const newPokemonList = [...pokemons].map((pokemon) => {
-      if (pokemon.id === pokemonID) {
-        return { ...pokemon, name: pokemonName };
-      }
-      return pokemon;
-    });
-
-    setPokemons(newPokemonList);
-  };
-
-  useEffect(() => {
-    getPokemon(getRandomInt(3))
-      .then((pokemon) => addPokemonToMyDeck(pokemon))
-      .catch(console.error);
-  }, []);
 
   return (
     <div>
@@ -67,11 +49,7 @@ const MyDeck = () => {
       <Grid container spacing={2}>
         {pokemons?.map((pokemon) => (
           <Grid item xs={6} sm={3} key={pokemon.id}>
-            <PokemonCard
-              pokemon={pokemon}
-              releaseAPokemon={releaseAPokemon}
-              changeAPokemonName={changeAPokemonName}
-            ></PokemonCard>
+            <PokemonCard pokemon={pokemon}></PokemonCard>
           </Grid>
         ))}
       </Grid>

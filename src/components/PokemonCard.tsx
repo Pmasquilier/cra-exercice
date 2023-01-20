@@ -10,19 +10,34 @@ import {
 } from "@mui/material";
 import { Pokemon } from "../type/pokemon";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 type Props = {
   pokemon: Pokemon;
-  releaseAPokemon: (pokemonID: string) => void;
-  changeAPokemonName: (name: string, pokemonID: string) => void;
 };
 
-const PokemonCard = ({
-  pokemon,
-  releaseAPokemon,
-  changeAPokemonName,
-}: Props) => {
+const PokemonCard = ({ pokemon }: Props) => {
   const [isNameFocused, setIsNameFocused] = useState(false);
+  const dispatch = useDispatch();
+
+  const releaseAPokemon = (pokemonID: string) => {
+    dispatch({
+      type: "pokemons/removePokemon",
+      payload: pokemonID,
+    });
+  };
+
+  const changeAPokemonName = (pokemonName: string, pokemonID: string) => {
+    dispatch({
+      type: "pokemons/changePokemonName",
+      payload: {
+        pokemonName,
+        pokemonID,
+      },
+    });
+  };
+
   return (
     <>
       <Card sx={{ maxWidth: 250 }}>
@@ -36,16 +51,14 @@ const PokemonCard = ({
             <div className="App">
               {!isNameFocused ? (
                 <Typography
-                  key="password"
                   onClick={() => {
                     setIsNameFocused(true);
                   }}
                 >
-                  {pokemon.name}
+                  Name: {pokemon.name}
                 </Typography>
               ) : (
                 <TextField
-                  key="password"
                   autoFocus
                   value={pokemon.name}
                   onChange={(event) =>
@@ -59,16 +72,12 @@ const PokemonCard = ({
           <Typography variant="body1" component="div">
             Base experience : {pokemon.base_experience}
           </Typography>
-          <Typography variant="body2" component="div">
-            Height : {pokemon.height}
-          </Typography>
-          <Typography gutterBottom variant="body2" component="div">
-            Weight : {pokemon.weight}
-          </Typography>
         </CardContent>
         <CardActions>
           <Button variant="contained" color="primary" size="small">
-            Learn More
+            <Link to="/pokemon-detail" state={{ pokemon: pokemon }}>
+              Learn More
+            </Link>
           </Button>
           <Button
             variant="contained"

@@ -9,18 +9,22 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Auth0ProviderWithNavigate } from "./components/Auth0ProviderWithNavigate";
+import { Provider } from "react-redux";
+import { store } from "./services/redux";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <Auth0ProviderWithNavigate>
-        <App />
-      </Auth0ProviderWithNavigate>
-    </React.StrictMode>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <React.StrictMode>
+        <Auth0ProviderWithNavigate>
+          <App />
+        </Auth0ProviderWithNavigate>
+      </React.StrictMode>
+    </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

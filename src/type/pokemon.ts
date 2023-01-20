@@ -4,5 +4,15 @@ export type Pokemon = {
     height: number;
     weight: number;
     sprites: string;
-    id: string
+    id: string;
+    abilities: PokemonAbility[];
   };
+
+  type PokemonAbility = {
+    is_hidden: boolean;
+    slot: number;
+    ability: {
+        name: string;
+        url:string;
+    };
+  }
